@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>What is Selenium Grid?</title>
+  <meta name="description" content="Selenium Grid allows to run tests on different machines against different browsers in parallel. That is running multiple tests at the same time against diffe...">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/selenium/grid/2017/10/16/selenium-grid.html">
+  <link rel="alternate" type="application/rss+xml" title="Nilmi&#39;s Blog" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">Nilmi&#39;s Blog</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">What is Selenium Grid?</h1>
+    <p class="post-meta">
+      <time datetime="2017-10-16T11:10:30+05:30" itemprop="datePublished">
+        
+        Oct 16, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Selenium Grid allows to run tests on different machines against different browsers in parallel. That is running multiple tests at the same time against different machines,  different browsers and operating systems.
+Essentially, Selenium grid support distributed test execution.
+</p>
+<p> Selenium Grid has Hub and Node architecture.</p>
+
+<h3 id="hub">Hub</h3>
+<p>The Hub The hub is the central point where we load our tests into. There should only be one hub in a grid. The hub is launched only on a single machine, for example a computer whose operating system is Windows 10 and whose browser is IE. </p>
+
+<h3 id="nodes">Nodes</h3>
+<p>Nodes are the Selenium instances that will execute the tests that we on the hub. There can be one or more nodes in a grid. Nodes can be launched on multiple machines with different platforms and browsers. The machines running the nodes need not be the same platform as that of the hub.</p>
+
+<p><img src="/images/selenium-grid/what-is-selenium-grid/selenium-grid.png" alt="Selenium Grid" class="img-responsive" /></p>
+
+<p>Nodes need to register with the Selenium Server. After that if you try to execute a test, this request goes to the server and server knows which node can execute this test (which node having matching utilities for the test, for example: matching browser, operating system).
+</p>
+
+<h3 id="now-lets-check-the-configuration-of-hub-and-node">Now let’s check the configuration of hub and node.</h3>
+
+<h4 id="configuring-hub">Configuring Hub:</h4>
+<p><strong>Step 1</strong></p>
+<p>Go to the machine which you need to setup as hub and download the Selenium Server jar file.</p>
+
+<p><strong>Step 2</strong></p>
+<p>Place the Selenium Server .jar file anywhere in your HardDrive.</p>
+
+<p><strong>Step 3</strong></p>
+<p>Go to the directory where you placed the Selenium Server .jar file from the command prompt. Type</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">selenium</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">standalone</span><span class="o">-</span><span class="mf">2.30</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">jar</span> <span class="o">-</span><span class="n">role</span> <span class="n">hub</span></code></pre></figure>
+
+<p>The hub should successfully be launched.</p>
+
+<h4 id="configuring-node">Configuring Node:</h4>
+<p><strong>Step 1</strong></p>
+<p>Go to Machine you need to setup as node and download the Selenium Server jar file.</p>
+
+<p><strong>Step 2</strong></p>
+<p>Place the Selenium server .jar file anywhere in the drive. Launch a command prompt and navigate to driver location where the Selenium server .jar file is available. Type the code below. IP address and port '10.101.16.255' used here the that is where the hub is running. We also used port 5557 though you can choose any free port number you desire.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">selenium</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">standalone</span><span class="o">-</span><span class="mf">2.46</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">jar</span> <span class="o">-</span><span class="n">role</span> <span class="n">webdriver</span> <span class="o">-</span><span class="n">hub</span> <span class="n">http</span><span class="p">:</span><span class="mf">10.101</span><span class="o">.</span><span class="mf">16.255</span><span class="o">.</span><span class="mi">4444</span><span class="o">/</span><span class="n">grid</span><span class="o">/</span><span class="n">register</span> <span class="o">-</span><span class="n">port</span> <span class="mi">5557</span></code></pre></figure>
+
+<h3 id="set-desired-capabilities-in-code">Set desired capabilities in code</h3>
+<p>Then we need to set desired capabilities in code required for RemoteWebDriver.
+Note: For this code we need to use RemoteWebDriver not the WebDriver.
+
+Desired capabilities are used to set some properties for WebDriver, since not all server implementation will every webDriver feature supports.
+Desired capabilities need to set in Selenium Grid setup for webDriver client code are,
+Platform
+BrowserName
+
+Note: You can check browser and platform details of nodes from hub’s grid console. Just open the url displayed in cmd in browser. (localhost:port or 4444/grid/console)
+</p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Nilmi&#39;s Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Nilmi&#39;s Blog
+            
+            </li>
+            
+            <li><a href="mailto:wijerathna.nilmi@gmail.com">wijerathna.nilmi@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>I am a senior software QA engineer with 4+ years experience and I enjoy writing test automation blog, travel photography and drone videography.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
