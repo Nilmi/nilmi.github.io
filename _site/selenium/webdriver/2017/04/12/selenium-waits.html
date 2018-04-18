@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Selenium Waits</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/selenium/webdriver/2017/04/12/selenium-waits.html">
+  <link rel="alternate" type="application/rss+xml" title="Nilmi&#39;s Blog" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">Nilmi&#39;s Blog</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Selenium Waits</h1>
+    <p class="post-meta">
+      <time datetime="2017-04-12T16:40:15+05:30" itemprop="datePublished">
+        
+        Apr 12, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><img src="/images/selenium/implicit-and-explicit-wait/wait.png" alt="image-title-here" class="img-responsive" /></p>
+
+<p>There are different kinds of waits in Selenium. Wait can be used to save your scripts from failing because of network delays, elements not loaded at the time of script execution etc. Instead of using thread.sleep to synchronize your code, you can choose appropriate wait which suites for the situation.</p>
+<p>Let’s discuss about wait commands in Selenium and finally about thread.sleep and it’s disadvantages.</p>
+
+<h3 id="1-explicit-wait">1. Explicit wait</h3>
+
+<p>This will make your code to wait for certain expected condition to occur before moving forward.
+An explicit wait can be used where synchronization is needed, for example, the page is loaded but we are still waiting for a call to complete and an element to appear.
+Selenium WebDriver provides,
+..WebDriverWait
+..ExpectedCondition
+classes for implementing an explicit wait. The ExpectedCondition class provides a set of predefined conditions to wait before proceeding further in the code. An example of an explicit wait is:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">WebDriverWait</span> <span class="n">wait</span> <span class="o">=</span> <span class="n">new</span> <span class="no">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">wait</span><span class="p">.</span><span class="nf">until</span><span class="p">(</span><span class="no">ExpectedConditions</span><span class="p">.</span><span class="nf">titleContains</span><span class="p">(</span><span class="s2">"selenium"</span><span class="p">));</span>  <span class="sr">//</span><span class="no">ExpectedConditions</span><span class="p">.</span><span class="nf">elementTo</span> <span class="no">BeVisible</span><span class="p">()</span><span class="o">/</span><span class="n">clickable</span><span class="p">()</span></code></pre></figure>
+
+<p>Or</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="kp">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">explicitWait</span><span class="p">(</span><span class="no">WebDriver</span> <span class="n">driver</span><span class="p">,</span> <span class="no">String</span> <span class="n">text</span><span class="p">)</span> <span class="p">{</span>
+ <span class="p">(</span><span class="n">new</span> <span class="no">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="mi">10</span><span class="p">)).</span><span class="nf">until</span><span class="p">(</span><span class="no">ExpectedConditions</span><span class="p">.</span><span class="nf">elementToBeClickable</span><span class="p">(</span><span class="no">By</span><span class="p">.</span><span class="nf">partialLinkText</span><span class="p">(</span><span class="n">text</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>WebDriverWait is a sub class of FluentWait . According to above code you can configure web driver wait object to wait until specified expected condition is true.</p>
+
+<h3 id="2--implicit-wait">2.  Implicit wait</h3>
+<p>When an implicit wait is implemented in tests, if WebDriver cannot find an element in the Document Object Model (DOM), it will wait for a defined amount of time for the element to appear in the DOM. In other terms, an implicit wait polls the DOM for a certain amount of time when trying to find an element or elements if they are not immediately available.
+Once set implicit wait is set for lifetime of driver object and for all elements.</p>
+<h4 id="disadvantages">Disadvantages:</h4>
+<p>The downside is if you set the waiting limit to be 5 seconds and the elements appears in the DOM in 6 seconds, your tests will fail because you configuration is to wait a maximum of 5 seconds.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="kp">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">implicitWait</span><span class="p">(</span><span class="no">WebDriver</span> <span class="n">driver</span><span class="p">)</span> <span class="p">{</span>
+ <span class="n">driver</span><span class="p">.</span><span class="nf">manage</span><span class="p">().</span><span class="nf">timeouts</span><span class="p">().</span><span class="nf">implicitlyWait</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="no">TimeUnit</span><span class="o">.</span><span class="no">SECONDS</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>To summarize: Implicit wait time is applied to all elements in your script and Explicit wait time is applied only for a particular specified element.</p>
+
+<h3 id="3--fluent-wait">3.  Fluent wait</h3>
+<p>As I mentioned earlier FluentWait is the super class of WebDriverWait. When we are using the FluentWait instance, we can specify:
+..The frequency with which FluentWait has to check the conditions defined.
+..Ignore specific types of exception waiting such as NoSuchElementExceptions while searching for an element on the page.
+..Maximum amount of time to wait for a condition.</p>
+
+<p>Below is a sample code for fluent wait.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Wait</span> <span class="n">wait</span> <span class="o">=</span> <span class="n">new</span> <span class="no">FluentWait</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span> <span class="p">.</span><span class="nf">withTimeout</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="no">SECONDS</span><span class="p">)</span> <span class="p">.</span><span class="nf">pollingEvery</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="no">SECONDS</span><span class="p">)</span> <span class="p">.</span><span class="nf">ignoring</span><span class="p">(</span><span class="no">NoSuchElementException</span><span class="p">.</span><span class="nf">class</span><span class="p">);</span></code></pre></figure>
+
+<p>An example of fluent wait:</p>
+<p>Let’s say you have an element which sometime appears in just 4 second and some time it takes minutes to appear. In that case it is better to use fluent wait, as this will try to find element again and again until it find it or until the final timer runs out.</p>
+
+<h3 id="4--pageloadtimeout">4.  PageLoadTimeout</h3>
+<p>Sets the amount of time to wait for a page load to complete before throwing an error. If you set the timeout as a negative value, page loads can be indefinite.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">driver</span><span class="p">.</span><span class="nf">manage</span><span class="p">().</span><span class="nf">timeouts</span><span class="p">().</span><span class="nf">pageLoadTimeout</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="no">SECONDS</span><span class="p">);</span></code></pre></figure>
+
+<h3 id="5-setscripttimeout">5. SetScriptTimeout</h3>
+<p>SetScriptTimeout configures the amount of time to wait for an asynchronous script to finish execution before throwing an error. If the timeout is set to a negative value, script will be allowed to run indefinitely.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">driver</span><span class="p">.</span><span class="nf">manage</span><span class="p">().</span><span class="nf">timeouts</span><span class="p">().</span><span class="nf">setScriptTimeout</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="no">SECONDS</span><span class="p">);</span></code></pre></figure>
+
+<h3 id="thread-sleep">Thread sleep</h3>
+<p>Finally what about thread sleep? Thread sleep forces the browser to wait for a specific time, this is rarely used in Selenium scripts. </p>
+<p>Selenium provide   the above mentioned waits which can be matched with the situation you need to handle. So if you specify them in your code you can specify much better timeout values which make the tests more reliable. Since the condition evaluated time to time, those waits not slowing the tests down. So to conclude using thread.sleep is not a good idea, always try to use Selenium waits.</p>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Nilmi&#39;s Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Nilmi&#39;s Blog
+            
+            </li>
+            
+            <li><a href="mailto:wijerathna.nilmi@gmail.com">wijerathna.nilmi@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>I am a senior software QA engineer with 4+ years experience and I enjoy writing test automation blog and travel photography.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
