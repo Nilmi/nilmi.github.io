@@ -12,11 +12,11 @@ categories: Java
 
 <p>Java is an object oriented language. So it is all about classes and objects. We use inheritance when writing Java code, because of it's benefits. It helps to reuse the code and polymorphically refer to objects.</p>
 
-<p>Sub classes can inherit methods from **super type**. Yes I said super type, because it can be a class or an interface the sub class inherits from. After Java version 8, **interfaces can have concrete inheritable methods**. These methods are called *default methods*. Once the sub class inherits the method, it can either keep it as it is or override it if the sub class need to provide it's own specific behaviour to the method.</p>
+<p>Sub classes can inherit methods from <b>super type</b>. Yes I said super type, because it can be a class or an interface the sub class inherits from. After Java version 8, <b>interfaces can have concrete inheritable methods</b>. These methods are called *default methods*. Once the sub class inherits the method, it can either keep it as it is or override it if the sub class need to provide it's own specific behaviour to the method.</p>
 
   
 
-<p>There are some rule need to be followed when overriding a method. ** Note that same rules apply when providing method implementation for abstract method of interface or abstract class. ** </p>
+<p>There are some rule need to be followed when overriding a method. <b>Note that same rules apply when providing method implementation for abstract method of interface or abstract class. </b></p>
 
   
 
