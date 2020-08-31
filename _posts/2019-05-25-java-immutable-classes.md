@@ -5,7 +5,6 @@ date: 2019-05-25 23:21:36 +0800
 categories: Java
 
 ---
-### Implement your own immutable class in Java
 
 <p>Immutable class's object's instance variable values can not be changed. Immutable classes are thread safe, so they are useful in applications using concurrency/ parallelism. String class, primitive wrapper classes are examples for immutable classes in Java language.</p>
 

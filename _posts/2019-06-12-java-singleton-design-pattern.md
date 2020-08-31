@@ -6,7 +6,6 @@ date: 2019-06-12 23:12:20 +0800
 categories: Java
 
 ---
-### Singleton Design Pattern
 
 <p>This article describes details about singleton design pattern and how to implement singleton design pattern in Java.</p>
 <p>We can use singleton design pattern to make sure there is only one instance of a class within the application. Singleton is called creational design pattern because it is related to creating objects.</p>
