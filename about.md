@@ -2,7 +2,7 @@
 layout: page
 permalink: /about/
 ---
-## About
+### Nilmi
 
 - Energetic senior software QA engineer with 6+ years of experience in developing automated tests for enterprise applications
 - Extensive knowledge of overall software testing process including planning, designing, implementing, executing and monitoring tests
