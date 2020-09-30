@@ -4,4 +4,8 @@ title: About
 permalink: /about/
 ---
 
-I am a senior software QA engineer with 4+ years experience and I enjoy writing test automation blog and travel photography.
+● Energetic senior software QA engineer with 6+ years of experience in developing automated tests for enterprise applications
+● Extensive knowledge of overall software testing process including planning, designing, implementing, executing and monitoring tests
+● Experienced in developing test cases using Spring framework for test driven development
+● Multifaceted experience in automated testing, performance testing and manual testing
+● An enthusiastic team player, creative thinker with strong analytical skills and attention to detail
